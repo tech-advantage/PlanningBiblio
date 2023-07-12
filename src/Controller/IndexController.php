@@ -69,6 +69,12 @@ class IndexController extends BaseController
 
         $groupes = $this->getFrameworksGroup();
         $site = $this->setSite($site);
+
+        // Symfony Session
+        $session = $request->getSession();
+        $session->set('date', $date);
+        $session->set('site', $site);
+
         $pasDeDonneesSemaine = $this->noWeekDataFor($datesSemaine, $site);
         global $idCellule;
         $idCellule=0;
