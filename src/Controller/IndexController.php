@@ -73,6 +73,7 @@ class IndexController extends BaseController
         // Symfony Session
         $session = $request->getSession();
         $session->set('date', $date);
+        $session->set('loginId', $_SESSION['login_id']);
         $session->set('site', $site);
 
         $pasDeDonneesSemaine = $this->noWeekDataFor($datesSemaine, $site);
