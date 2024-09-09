@@ -345,6 +345,10 @@ class absences
 
                 // Envoi du mail
                 $m = new CJMail();
+
+                # Problématique: on envoie un mail à plusieurs destinataires, dans ce cas, comment avoir un lien de désinscription personnalisé ?
+                # Solution? : Envoyer un mail par tête.
+
                 $m->subject = $titre;
                 $m->message = $message;
                 $m->to = $destinataires;

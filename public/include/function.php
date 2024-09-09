@@ -17,6 +17,7 @@ use App\Model\Agent;
 use App\Model\WorkingHour;
 use App\PlanningBiblio\WorkingHours;
 use App\PlanningBiblio\NotificationTransporter\NotificationTransporterInterface;
+use App\PlanningBiblio\NotificationManager;
 
 // Contrôle si ce script est appelé directement, dans ce cas, affiche Accès Refusé et quitte
 if (__FILE__ == $_SERVER['SCRIPT_FILENAME']) {
@@ -282,6 +283,11 @@ class CJMail implements NotificationTransporterInterface
         $mail->From = $GLOBALS['config']['Mail-From'];
         $mail->FromName = $GLOBALS['config']['Mail-FromName'];
         $mail->IsHTML();
+
+        $notificationManager = new NotificationManager();
+        $token = $notificationManager->getUserToken();
+        $mail->addCustomHeader("List-Unsubscribe-Post", "List-Unsubscribe=One-Click");
+        $mail->addCustomHeader("List-Unsubscribe", "$token");
     
         $mail->Body = $this->message;
     
